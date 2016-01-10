@@ -21,6 +21,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     var startLocation: CLLocation!
     var startDistance : CLLocationDistance!
     
+    var pin : MKPointAnnotation!
+    var distancia : Double!
     
     
     override func viewDidLoad() {
@@ -40,6 +42,8 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         manejador.requestWhenInUseAuthorization()
         manejador.distanceFilter = 50.0
         
+        pin = nil
+        distancia = 0.0
         mapa.mapType = .Satellite
         
         let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.Dark)
@@ -55,10 +59,10 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     
     func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
         
-        let center = CLLocationCoordinate2D(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
-        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-        
-        self.mapa.setRegion(region, animated: true)
+//        let center = CLLocationCoordinate2D(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
+//        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+//        
+//        self.mapa.setRegion(region, animated: true)
     }
     
     func segmentValueChanged(sender: AnyObject?){
@@ -75,23 +79,33 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let location = locations[locations.count - 1] as CLLocation
+        let location = locations.last! as CLLocation
         
         // ---
-        let latestLocation: AnyObject = locations[locations.count - 1]
+        let latestLocation: CLLocation = locations[locations.count - 1]
         
         if startLocation == nil {
-            startLocation = latestLocation as! CLLocation
+            startLocation = latestLocation
         }
         
         let distanceBetween: CLLocationDistance = latestLocation.distanceFromLocation(startLocation)
         // ---
         
-        let pin = MKPointAnnotation()
-        pin.title = "Latitud: \(location.coordinate.latitude), Longitud: \(location.coordinate.longitude)"
-        pin.subtitle = "Distancia: \(distanceBetween)"
-        pin.coordinate = location.coordinate
-        mapa.addAnnotation(pin)
+        if distanceBetween >= 50 {
+            
+            distancia = distancia + distanceBetween
+            pin = MKPointAnnotation()
+            pin.title = "Latitud: \(NSString(format:"%.3f", latestLocation.coordinate.latitude)), Longitud: \(NSString(format:"%.3f", latestLocation.coordinate.longitude))"
+            pin.subtitle = "Distancia: \(NSString(format:"%.3f", distancia))"
+            pin.coordinate = latestLocation.coordinate
+            mapa.addAnnotation(pin)
+            startLocation = nil
+        }
+        
+        let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+        
+        self.mapa.setRegion(region, animated: true)
 
     }
     
