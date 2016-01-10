@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MapApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="euf-qq-jRo">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            </mapView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Dq8-PV-vJp">
+                                <rect key="frame" x="-4" y="473.5" width="328" height="94.5"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Q1-94-FbP" customClass="AVDSegmentedControl" customModule="MapApp" customModuleProvider="target">
+                                <rect key="frame" x="23.5" y="500" width="273" height="41"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="41" id="69X-cF-aGE"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Dq8-PV-vJp" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="4WV-jO-Voq"/>
+                            <constraint firstItem="euf-qq-jRo" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="4vl-up-EA1"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="8Q1-94-FbP" secondAttribute="bottom" constant="32" id="6MM-XM-51i"/>
+                            <constraint firstItem="euf-qq-jRo" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="K3Y-rh-wW3"/>
+                            <constraint firstItem="Dq8-PV-vJp" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="1:6" id="Vmk-Cr-Jpb"/>
+                            <constraint firstAttribute="trailing" secondItem="euf-qq-jRo" secondAttribute="trailing" id="b2M-2O-eOy"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="euf-qq-jRo" secondAttribute="bottom" id="d23-WG-pGO"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Dq8-PV-vJp" secondAttribute="trailing" constant="-20" id="dyb-vb-taA"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Dq8-PV-vJp" secondAttribute="bottom" id="oLE-ue-59N"/>
+                            <constraint firstItem="8Q1-94-FbP" firstAttribute="centerX" secondItem="Dq8-PV-vJp" secondAttribute="centerX" id="qtN-OE-Fzs"/>
+                            <constraint firstItem="8Q1-94-FbP" firstAttribute="centerY" secondItem="Dq8-PV-vJp" secondAttribute="centerY" id="tOv-ml-pSq"/>
+                            <constraint firstItem="8Q1-94-FbP" firstAttribute="width" secondItem="Dq8-PV-vJp" secondAttribute="width" multiplier="1:1.2" id="xxC-I4-SLB"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="6MM-XM-51i"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="imageBackground" destination="Dq8-PV-vJp" id="zjk-wf-W6L"/>
+                        <outlet property="mapa" destination="euf-qq-jRo" id="wJx-KU-SfU"/>
+                        <outlet property="segmentControl" destination="8Q1-94-FbP" id="T8Z-sb-n1D"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="445" y="440"/>
+        </scene>
+    </scenes>
+</document>
